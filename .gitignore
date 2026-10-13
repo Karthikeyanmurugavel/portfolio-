@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+*.local
+*.log
+.DS_Store
+.vercel
+*.tsbuildinfo
+# Previous versions, kept on disk but not published. Holds a nested .git
+# (from create-next-app) that git would turn into a broken submodule, and ~60 MB
+# of rendered MP4s that have no place in a public portfolio repo.
+_archive/
