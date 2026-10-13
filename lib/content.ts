@@ -25,11 +25,31 @@ export const identity = {
   resumeReady: false,
 } as const;
 
+/**
+ * The site's own address, used for the canonical link and Open Graph URL.
+ *
+ * Resolved at build time rather than written in, because the address does not
+ * exist until the first deploy:
+ *   1. NEXT_PUBLIC_SITE_URL — set this in Vercel once a custom domain is added.
+ *   2. VERCEL_PROJECT_PRODUCTION_URL — Vercel sets this on every build to the
+ *      project's production domain (no protocol), so the first deploy is already
+ *      correct with nothing to configure.
+ *   3. localhost, for local builds.
+ *
+ * This used to be hard-coded to the OLD portfolio's address, which would have
+ * told search engines this new site was a copy of that one.
+ */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'http://localhost:3000');
+
 export const seo = {
   title: 'Karthikeyan Murugavel — ML/AI Engineer',
   description:
     'ML/AI Engineer in Chennai building local LLM and RAG systems, deep learning pipelines and the backends that put them in front of users.',
-  url: 'https://karthik-portfolio-ivory.vercel.app',
+  url: siteUrl,
 } as const;
 
 export const nav = [
